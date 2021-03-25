@@ -30,7 +30,7 @@
 
 ```
 	dependencies {
-	        implementation 'com.gitee.Hancher:contribution-view:v1.0.4'
+	        implementation 'com.gitee.Hancher:contribution-view:v1.0.6'
 	}
 ```
 
