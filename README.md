@@ -1,5 +1,7 @@
 # ContributionView
 
+一个 Android 上显示类似于 GitHub 和 gitee 上贡献度的图表，用于笔记、活动状态等统计显示
+
 ## 地址
 
 [CSDN博客](https://blog.csdn.net/qq_23370223/article/details/115200215)
