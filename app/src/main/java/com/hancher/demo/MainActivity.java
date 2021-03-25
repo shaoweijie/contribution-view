@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<ContributionItem> data = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2020, 3 - 1, 1);
+        calendar.set(2020, 3 - 1, 2);
         Date startDate = calendar.getTime();
         for (int i = 0; i < 150; i++) {
             data.add(new ContributionItem(calendar.getTime(), i % 10));
@@ -49,7 +49,12 @@ public class MainActivity extends AppCompatActivity {
         contributionView.setOnItemClick(new ContributionView.OnItemClickListener() {
             @Override
             public void onClick(int position, ContributionItem item) {
-                Toast.makeText(MainActivity.this, position + ":" + item.getRow() + "," + item.getCol(), Toast.LENGTH_SHORT).show();
+                StringBuffer stringBuffer = new StringBuffer();
+                stringBuffer.append("当前位置:").append(position)
+                        .append("\n图表中位置:[").append(item.getRow()).append(",")
+                        .append(item.getCol()).append("]\n")
+                        .append("时间:").append(item.getTime());
+                Toast.makeText(MainActivity.this, stringBuffer, Toast.LENGTH_SHORT).show();
             }
         });
     }
