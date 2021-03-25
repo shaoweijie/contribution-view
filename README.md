@@ -6,6 +6,8 @@
 
 [Gitee代码托管](https://gitee.com/Hancher/contribution-view)
 
+[![](https://jitpack.io/v/com.gitee.Hancher/contribution-view.svg)](https://jitpack.io/#com.gitee.Hancher/contribution-view)
+
 ## 运行效果
 
 ![运行效果图](https://img-blog.csdnimg.cn/20210325113542246.gif#pic_center)
@@ -28,7 +30,7 @@
 
 ```
 	dependencies {
-	        implementation 'com.gitee.Hancher:contribution-view:1.0'
+	        implementation 'com.gitee.Hancher:contribution-view:v1.0.4'
 	}
 ```
 
