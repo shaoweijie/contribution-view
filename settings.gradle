@@ -1,0 +1,3 @@
+include ':contribution'
+include ':app'
+rootProject.name = "Demo"

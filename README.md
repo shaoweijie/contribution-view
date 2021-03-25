@@ -1,39 +1,120 @@
 # ContributionView
 
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+## 运行效果
 
-#### 软件架构
-软件架构说明
+图
+
+## 添加依赖
+
+### 在project的build.gradle添加如下代码
+
+```
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+```
+
+### 在app的build.gradle中添加如下代码
+
+```
+dependencies {
+    implementation 'org.greenrobot:greendao:3.2.2'
+}
+```
+
+## 默认方案
+
+### xml文件
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AccountActivity">
+
+    <com.hancher.contribution.ContributionView
+        android:id="@+id/contributionView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+只需要固定宽度，高度会自动调整，因此高度使用包裹即可。
+
+因此可以根据个人需要，将其用横向滚动布局包裹，扩大横向固定宽度，实现左右滑动，在此不再一一实验。
+
+### java调用
+
+```java
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        List<ContributionView.Item> data = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2020, 3 - 1, 1);
+        Date startDate = calendar.getTime();
+        for (int i = 0; i < 121; i++) {
+            data.add(new ContributionView.Item(calendar.getTime(),i % 5));
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        binding.contributionView.setData(startDate, data);
+    }
+```
+
+## 其他接口
+
+通过配置实体类，修改样式
+
+```
+setData(Date startDate, List<ContributionItem> data, ContributionConfig config)
+```
+
+配置接口
+
+```java
+        ContributionConfig config = new ContributionConfig()
+                .setBorderWidth(2)//边框宽度
+                .setBorderColor(0xFF9E9E9E)//边框颜色
+                .setItemRound(5)//圆角矩形圆半径
+                .setMonths(new String[]{"1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"})//月份字符串
+                .setPadding(4)//单个框宽度
+                .setRank(new int[]{0,2,5,8,10})//颜色等级范围，大于等于2小于5则为第二个颜色范围
+                .setRankColor(new int[]{0xFFEBEDF0, 0xFF9BE9A8, 0xFF40C463, 0xFF30A14E, 0xFF216E39})//填充的等级颜色
+                .setWeeks(new String[]{"", "周一", "", "周三", "", "周五", ""})//周名称
+                .setStartOfWeek(Calendar.SUNDAY)//配合setWeeks一起使用，可以实现第一行为周日，默认第一行周一
+                .setTxtColor(0xFF9E9E9E);//设置文字颜色
+```
+
+配置点击监听
+
+```java
+        binding.contributionView.setOnItemClick(new ContributionView.OnItemClickListener() {
+            @Override
+            public void onClick(int position, ContributionItem item) {
+                Toast.makeText(ContributionActivity.this, position + ":" + item.getRow() + "," + item.getCol(), Toast.LENGTH_SHORT).show();
+            }
+        });
+```
 
 
-#### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+## 备注
 
-#### 使用说明
+如果你觉得这个库还不错,请赏我一颗star吧
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+如果star超过1k，或者有打赏，那我再回头看看增加一些其他功能
 
 
-#### 特技
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+纵向贡献图表
+
+动画
