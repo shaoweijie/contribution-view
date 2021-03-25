@@ -9,19 +9,20 @@
 ### 在project的build.gradle添加如下代码
 
 ```
-allprojects {
-    repositories {
-        maven { url "https://jitpack.io" }
-    }
-}
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 ```
 
 ### 在app的build.gradle中添加如下代码
 
 ```
-dependencies {
-    implementation 'org.greenrobot:greendao:3.2.2'
-}
+	dependencies {
+	        implementation 'com.gitee.Hancher:contribution-view:1.0'
+	}
 ```
 
 ## 默认方案
